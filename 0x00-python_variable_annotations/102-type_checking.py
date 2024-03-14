@@ -4,6 +4,7 @@ from typing import Tuple, List, Any
 
 
 def zoom_array(lst: Tuple, factor: int = 2) -> List:
+    """fuction to updated typing"""
     zoomed_in = [
         item for item in lst
         for i in range(factor)
