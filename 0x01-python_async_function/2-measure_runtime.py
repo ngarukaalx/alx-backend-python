@@ -2,15 +2,16 @@
 """
 This module contains func measure_time
 """
-import time
+from time import time
 import asyncio
 wait_n = __import__('1-concurrent_coroutines').wait_n
 
 
 async def measure_time(n: int, max_delay: int) -> float:
     """measures runtime"""
-    start = time.perf_counter()
+    start = time()
     asyncio.run(wait_n(n, max_delay))
-    end = time.perf_counter() - start
+    end = time()
+    time_taken = end - start
 
-    return end / n
+    return time_taken / n
