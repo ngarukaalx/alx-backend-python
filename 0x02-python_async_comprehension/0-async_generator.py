@@ -11,7 +11,7 @@ from typing import Generator
 import random
 
 
-async def async_generator() -> Generator[int, None, None]:
+async def async_generator() -> Generator[float, None, None]:
     """generator fuction yields int"""
     for i in range(10):
         await asyncio.sleep(1)
