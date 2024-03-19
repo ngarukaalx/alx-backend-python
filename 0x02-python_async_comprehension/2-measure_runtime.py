@@ -11,7 +11,7 @@ import asyncio
 async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 
-async def measure_runtime():
+async def measure_runtime() -> float:
     """measure run time of pararell excution"""
     start = time()
     await asyncio.gather(
