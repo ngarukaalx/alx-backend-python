@@ -6,19 +6,19 @@ four times in parallel using asyncio.gather.
 
 measure_runtime should measure the total runtime and return it.
 """
-import time
+from time import time
 import asyncio
 async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 
-async def measure_runtime() -> float:
+async def measure_runtime():
     """measure run time of pararell excution"""
-    start = time.perf_counter()
+    start = time()
     await asyncio.gather(
             async_comprehension(),
             async_comprehension(),
             async_comprehension(),
             async_comprehension()
             )
-    end = time.perf_counter() - start
+    end = time() - start
     return end
