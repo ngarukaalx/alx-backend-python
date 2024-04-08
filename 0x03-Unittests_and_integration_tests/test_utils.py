@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Test module for utils.access_nested_map"""
 
-from utils import access_nested_map, get_json
+import utils
+from utils import access_nested_map, get_json, memoize
 import unittest
 from parameterized import parameterized
 from typing import Mapping, Sequence, Any, Dict
@@ -53,6 +54,39 @@ class TestGetJson(unittest.TestCase):
         result = get_json(test_usr)
         self.assertEqual(result, test_payload)
         mock_get.assert_called_once_with(test_usr)
+
+
+class TestMemoize(unittest.TestCase):
+    """class for testing memoize"""
+    def test_memoize(self):
+        """function"""
+        class TestClass:
+            """test class"""
+            def a_method(self):
+                """returns 42"""
+                return 42
+
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
+        # path a_method
+        with patch.object(
+                TestClass,
+                'a_method', return_value=42) as mocked_mtd:
+            # create instance of TestClass
+            class_test = TestClass()
+
+            # call a_property twice
+            first = class_test.a_property
+            second = class_test.a_property
+
+            # checked a_method was called only once
+            mocked_mtd.assert_called_once()
+
+            # Asssert result are correct
+            self.assertEqual(first, 42)
+            self.assertEqual(second, 42)
 
 
 if __name__ == "__main__":
